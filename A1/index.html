@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evenflix</title>
+    <link rel="stylesheet" href="../framework/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <nav class="navbar navbar-expand-md">
+          <div class="container">
+            <a class="navbar-brand fw-bold" href="#top">Evenflix</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <div class="navbar-nav ms-auto gap-3 mt-3 mt-md-0">
+                <a href="#events" class="nav-link px-0 text-center text-md-start">Events</a>
+                <a href="#register" class="nav-link px-0 text-center text-md-start">Register</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero-section">
+          <div class="container">
+            <div class="row align-items-center g-4">
+              <div class="col-12 col-lg-6">
+                <p class="section-kicker mb-2">Professional Event Planning</p>
+                <h1 class="display-5 fw-bold mb-3">Plan, discover, and register for standout events.</h1>
+                <p class="lead mb-0">
+                  Browse technology, business, marketing, and finance events in one responsive event
+                  management experience.
+                </p>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="3000">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Professional event audience" />
+                    </div>
+                    <div class="carousel-item">
+                      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Event presentation" />
+                    </div>
+                    <div class="carousel-item">
+                      <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Concert or entertainment event" />
+                    </div>
+                    <div class="carousel-item">
+                      <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Business meeting and networking" />
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" aria-labelledby="why-heading">
+          <div class="container">
+            <div class="section-heading">
+              <p class="section-kicker mb-2">Why Choose Us?</p>
+              <h2 id="why-heading" class="h1 mb-3">Everything needed for a smoother event experience</h2>
+            </div>
+
+            <div class="row g-4">
+              <article
+                v-for="item in whyChooseUs"
+                :key="item.title"
+                class="col-12 col-md-6 col-lg-4"
+              >
+                <div class="feature-card h-100">
+                  <div class="feature-icon" aria-hidden="true">{{ item.icon }}</div>
+                  <h3 class="h5">{{ item.title }}</h3>
+                  <p class="mb-0">{{ item.description }}</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="events" class="content-section section-soft" aria-labelledby="events-heading">
+          <div class="container">
+            <div class="section-heading">
+              <p class="section-kicker mb-2">Event Information</p>
+              <h2 id="events-heading" class="h1 mb-3">Searchable Event Table</h2>
+            </div>
+
+            <div class="filter-panel mb-4">
+              <div class="row g-3">
+                <div class="col-12 col-md-4">
+                  <label for="search-id" class="form-label">Search by Event ID</label>
+                  <input
+                    id="search-id"
+                    v-model.trim="filters.id"
+                    type="text"
+                    class="form-control"
+                    placeholder="Example: EVT10001"
+                  />
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="search-name" class="form-label">Search by Event Name</label>
+                  <input
+                    id="search-name"
+                    v-model.trim="filters.name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Example: AI"
+                  />
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="search-duration" class="form-label">Search by Duration</label>
+                  <input
+                    id="search-duration"
+                    v-model.trim="filters.duration"
+                    type="text"
+                    class="form-control"
+                    placeholder="Example: 6"
+                  />
+                </div>
+              </div>
+
+              <fieldset class="mt-4">
+                <legend class="form-label mb-2">Filter by Category</legend>
+                <div class="d-flex flex-wrap gap-3">
+                  <div v-for="category in tableCategories" :key="category" class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="table-category"
+                      :id="`table-${category}`"
+                      :value="category"
+                      v-model="filters.category"
+                    />
+                    <label class="form-check-label" :for="`table-${category}`">{{ category }}</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="table-responsive event-table-wrap">
+              <table class="table table-hover align-middle mb-0">
+                <caption class="visually-hidden">
+                  Events matching the current search and category filters
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Event ID</th>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Duration Hours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="event in filteredEvents" :key="event.eventid">
+                    <td class="fw-semibold">{{ event.eventid }}</td>
+                    <td>{{ event.eventname }}</td>
+                    <td><span class="category-pill">{{ event.category }}</span></td>
+                    <td>{{ event.durationhour }}</td>
+                  </tr>
+                  <tr v-if="filteredEvents.length === 0">
+                    <td colspan="4" class="text-center py-4 text-muted">
+                      No events match the current filters.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="register" class="content-section" aria-labelledby="register-heading">
+          <div class="container">
+            <div class="row g-4 align-items-start">
+              <div class="col-12 col-lg-5">
+                <p class="section-kicker mb-2">Registration Form</p>
+                <h2 id="register-heading" class="h1 mb-3">Reserve your place</h2>
+                <p class="text-muted mb-0">
+                  Select a category to see available event names, then submit the form to review your
+                  registration summary.
+                </p>
+              </div>
+
+              <div class="col-12 col-lg-7">
+                <form class="registration-panel" @submit.prevent="submitRegistration" novalidate>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="username" class="form-label">Username</label>
+                      <input
+                        id="username"
+                        v-model.trim="registration.username"
+                        type="text"
+                        class="form-control"
+                        required
+                        autocomplete="username"
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label for="password" class="form-label">Password</label>
+                      <input
+                        id="password"
+                        v-model="registration.password"
+                        type="password"
+                        class="form-control"
+                        required
+                        autocomplete="new-password"
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label for="confirm-password" class="form-label">Confirm Password</label>
+                      <input
+                        id="confirm-password"
+                        v-model="registration.confirmPassword"
+                        type="password"
+                        class="form-control"
+                        :class="{ 'is-invalid': showPasswordMismatch }"
+                        :aria-invalid="showPasswordMismatch.toString()"
+                        aria-describedby="password-match-message"
+                        required
+                        autocomplete="new-password"
+                      />
+                      <div
+                        id="password-match-message"
+                        class="form-text validation-message"
+                        :class="{ 'text-danger': showPasswordMismatch }"
+                      >
+                        <span v-if="showPasswordMismatch">Passwords do not match.</span>
+                        <span v-else>Confirm password must match the password.</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <fieldset class="mt-4">
+                    <legend class="form-label mb-2">Select Event Category</legend>
+                    <div class="d-flex flex-wrap gap-3">
+                      <div v-for="category in categories" :key="category" class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="registration-category"
+                          :id="`register-${category}`"
+                          :value="category"
+                          v-model="registration.category"
+                        />
+                        <label class="form-check-label" :for="`register-${category}`">
+                          {{ category }}
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="mt-4">
+                    <label for="event-select" class="form-label">Event Name</label>
+                    <select
+                      id="event-select"
+                      v-model="registration.eventid"
+                      class="form-select"
+                      required
+                    >
+                      <option
+                        v-for="event in eventsForRegistration"
+                        :key="event.eventid"
+                        :value="event.eventid"
+                      >
+                        {{ event.eventname }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-primary px-4">Submit Registration</button>
+                    <p v-if="formError" class="text-danger mb-0" role="alert">{{ formError }}</p>
+                  </div>
+
+                  <div
+                    v-if="submittedRegistration"
+                    class="alert alert-success mt-4 mb-0"
+                    role="status"
+                  >
+                    <strong>Registration Summary:</strong>
+                    {{ submittedRegistration.username }} registered for
+                    {{ submittedRegistration.eventName }} in the
+                    {{ submittedRegistration.category }} category.
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../framework/js/vue.global.js"></script>
+    <script src="../framework/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
