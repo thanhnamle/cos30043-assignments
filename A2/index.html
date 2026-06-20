@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insight Hire</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../framework/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="fixed-background"></div>
+
+  <div id="app">
+    <!-- Floating Pill Navbar -->
+    <div class="floating-navbar animate-fade-up">
+      <a href="#" @click.prevent="scrollTo('hero')" class="brand">Insight Hire.</a>
+      <ul class="nav-links d-none d-md-flex">
+        <li><a href="#" @click.prevent="scrollTo('explore-jobs')" class="nav-link">Jobs</a></li>
+        <li><a href="#" @click.prevent="scrollTo('task-manager')" class="nav-link">Tasks</a></li>
+        <li><a href="#" @click.prevent="scrollTo('apply-now')" class="nav-link">Apply</a></li>
+      </ul>
+      <a href="#" @click.prevent="scrollTo('apply-now')" class="btn btn-primary m-0" style="background-color: var(--daylight-orange); border-radius: 100px; padding: 0.6rem 1.5rem; border: none;">Get Started</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header id="hero" class="daylight-hero text-center d-flex flex-column justify-content-center align-items-center">
+      <div class="hero-content animate-fade-up px-3">
+        <small class="surtitle mb-3 d-block">Your Next Chapter</small>
+        <h1 class="display-title mb-0" style="color: var(--daylight-black);">Insight Hire.</h1>
+        <p class="subtitle mt-4 mx-auto" style="color: var(--daylight-brown);">Connecting passionate talent with groundbreaking opportunities.<br>A new way to power your career.</p>
+      </div>
+    </header>
+
+    <!-- Main Content that slides over background -->
+    <div class="content-wrapper">
+      <div class="daylight-container">
+        <div class="row g-4 content-grid animate-fade-up-delayed">
+          
+          <!-- Job Explorer -->
+          <div id="explore-jobs" class="col-12" style="scroll-margin-top: 100px;">
+            <div class="daylight-section glass-panel h-100">
+              <div class="row g-0 h-100">
+                <div class="col-md-4 border-end sidebar-section">
+                  <job-list></job-list>
+                </div>
+                <div class="col-md-8 content-section">
+                  <router-view></router-view>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Form -->
+          <div id="apply-now" class="col-12 col-xl-7" style="scroll-margin-top: 100px;">
+            <div class="daylight-section glass-panel h-100">
+              <div class="content-section h-100">
+                <small class="surtitle mb-4 d-block">Apply Now</small>
+                <h2 class="section-title mb-5">Secure your role</h2>
+                <application-form></application-form>
+              </div>
+            </div>
+          </div>
+
+          <!-- To-Do List -->
+          <div id="task-manager" class="col-12 col-xl-5" style="scroll-margin-top: 100px;">
+            <div class="daylight-section glass-panel h-100">
+              <div class="content-section h-100">
+                <small class="surtitle mb-4 d-block">Task Manager</small>
+                <h2 class="section-title mb-5">Track it all</h2>
+                <to-do-list></to-do-list>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="daylight-container mt-4 mb-5">
+        <footer class="py-4 text-center glass-panel" style="border-radius: 100px;">
+          <small class="surtitle text-muted mb-0">© 2026 Insight Hire</small>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="../framework/js/bootstrap.bundle.min.js"></script>
+  <script src="../framework/js/vue.global.js"></script>
+  <script src="../framework/js/vue-router.global.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
