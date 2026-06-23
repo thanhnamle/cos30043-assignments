@@ -31,8 +31,8 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* High quality minimalist architecture image from Unsplash, bright overlay */
-  background-image: linear-gradient(rgba(255, 247, 233, 0.4), rgba(255, 247, 233, 0.7)), url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2560&auto=format&fit=crop');
+  /* High quality modern startup team/office image from Unsplash */
+  background-image: linear-gradient(rgba(255, 247, 233, 0.4), rgba(255, 247, 233, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2560&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -194,50 +194,41 @@ body {
 }
 
 /* Hover Micro-interactions */
-.job-link {
+.job-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
   color: var(--daylight-brown);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  border-bottom: 1px solid var(--daylight-border);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
 }
 
-.job-link:last-child {
-  border-bottom: none;
-}
-
-.job-link-arrow {
+.job-item-arrow {
   opacity: 0;
   transform: translateX(-10px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   color: var(--daylight-orange);
 }
 
-.job-link:hover {
-  background-color: var(--daylight-subtle);
+.job-item:hover {
+  background-color: rgba(255, 255, 255, 0.4);
   color: var(--daylight-orange);
-  padding-left: 2.5rem; /* Slides text right */
 }
 
-.job-link:hover .job-link-arrow {
+.job-item:hover .job-item-arrow,
+.job-item.active .job-item-arrow {
   opacity: 1;
   transform: translateX(0);
 }
 
-.job-link.router-link-active {
-  background-color: var(--daylight-subtle);
+.job-item.active {
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.8);
   color: var(--daylight-orange);
-  font-weight: 600;
-}
-
-.job-link.router-link-active .job-link-arrow {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* Form Styles */

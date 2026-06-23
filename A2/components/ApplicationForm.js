@@ -37,12 +37,24 @@ export default {
           </div>
           <div class="col-md-6">
             <label class="form-label">Password *</label>
-            <input type="password" name="password" class="form-control" v-model="form.password" />
+            <div class="input-group">
+              <input :type="showPassword ? 'text' : 'password'" name="password" class="form-control" style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0;" v-model="form.password" />
+              <button class="btn btn-outline-secondary bg-white d-flex align-items-center px-3" type="button" @click="showPassword = !showPassword" style="border-color: rgba(76, 40, 6, 0.2); border-left: none; border-top-right-radius: 12px; border-bottom-right-radius: 12px; color: var(--daylight-brown);">
+                <span v-if="showPassword">🙈</span>
+                <span v-else>👁️</span>
+              </button>
+            </div>
             <div v-if="errors.password" class="error-text">{{ errors.password }}</div>
           </div>
           <div class="col-md-6">
             <label class="form-label">Confirm Password *</label>
-            <input type="password" name="confirmPassword" class="form-control" v-model="form.confirmPassword" />
+            <div class="input-group">
+              <input :type="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" class="form-control" style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0;" v-model="form.confirmPassword" />
+              <button class="btn btn-outline-secondary bg-white d-flex align-items-center px-3" type="button" @click="showConfirmPassword = !showConfirmPassword" style="border-color: rgba(76, 40, 6, 0.2); border-left: none; border-top-right-radius: 12px; border-bottom-right-radius: 12px; color: var(--daylight-brown);">
+                <span v-if="showConfirmPassword">🙈</span>
+                <span v-else>👁️</span>
+              </button>
+            </div>
             <div v-if="errors.confirmPassword" class="error-text">{{ errors.confirmPassword }}</div>
           </div>
         </div>
@@ -108,6 +120,8 @@ export default {
   data() {
     return {
       showTerms: false,
+      showPassword: false,
+      showConfirmPassword: false,
       form: {
         firstName: '',
         lastName: '',
@@ -141,7 +155,7 @@ export default {
       if (!this.form.password) this.errors.password = "Password is required.";
       else {
         if (this.form.password.length < 8) this.errors.password = "Minimum 8 characters.";
-        else if (!/[$%^&*]/.test(this.form.password)) this.errors.password = "Must include at least one special character ($, %, ^, &, *).";
+        else if (!/[$%^&*@#!]/.test(this.form.password)) this.errors.password = "Must include at least one special character ($, %, ^, &, *, @, #, !).";
       }
 
       if (this.form.password !== this.form.confirmPassword) {
